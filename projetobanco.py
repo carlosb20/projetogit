@@ -13,12 +13,13 @@ class JanelaPro:
         self.root = master
         self.tela()
         self.imagem3()
+        self.deposita_na_conta()
         self.botaopay()
         self.original = original
 
     def tela(self):
         self.root.geometry('900x500+200+100')
-        self.root.title('SISTEMA DE CONTA BANCARIA ')
+        self.root.title('DEPOSITO')
         self.root.iconbitmap()
 
         self.root['bg'] = 'yellow'
@@ -37,11 +38,23 @@ class JanelaPro:
         self.linha = Label(self.root,text='_'*272,bg='yellow')
         self.linha.place(relx=0.00,rely=0.24)
 
+    def deposita_na_conta(self):
+        self.label_senha = Label(self.root,text='CONTA')
+        self.label_senha.configure(font='Arial 15 bold')
+        self.label_senha.configure(bd=4)
+        self.label_senha.configure(relief=GROOVE)
+        self.label_senha.place(relx=0.20,rely=0.40)
+
+        self.entry_senha = Entry(self.root,text='CONTA')
+        self.entry_senha.configure(font='Arial 15 bold')
+        self.entry_senha.configure(bd=4)
+        self.entry_senha.configure(relief=GROOVE)
+        self.entry_senha.place(relx=0.35,rely=0.40)
 
 
     def botaopay(self):
         self.btn2 = Button(self.root, text='FIM', command=self.res)
-        self.btn2.place(relx=0.50,rely=0.50)
+        self.btn2.place(relx=0.40,rely=0.50)
 
     def res(self):
         self.original.deiconify()
@@ -64,6 +77,7 @@ class Contas:
 
     def tela_janelaC(self):
         self.janelaC.geometry('900x500+200+100')
+        self.janelaC.title('CADASTRAMENTO')
         self.janelaC['bg'] = 'yellow'
         self.labeltext = Label(self.janelaC,text=' CADASTRA CONTA ',bg='yellow')
         self.labeltext.config(font='Arial 20 bold')
@@ -182,7 +196,7 @@ class Principal:
 
     def tela(self):
         self.janela.geometry('900x500+200+100')
-        self.janela.title('AGENCIA E SENHA ')
+        self.janela.title('BANCO DO BRASIL ')
 
     def imagem(self):
         self.imagem2 = Image.open('bra1.png')
