@@ -14,7 +14,10 @@ class JanelaPro:
         self.tela()
         self.imagem3()
         self.deposita_na_conta()
+        self.deposia_agencia()
+        self.deposia_dinheiro()
         self.botaopay()
+        self.btn_cancela()
         self.original = original
 
     def tela(self):
@@ -39,7 +42,7 @@ class JanelaPro:
         self.linha.place(relx=0.00,rely=0.24)
 
     def deposita_na_conta(self):
-        self.label_senha = Label(self.root,text='CONTA')
+        self.label_senha = Label(self.root,text='CONTA',padx=10)
         self.label_senha.configure(font='Arial 15 bold')
         self.label_senha.configure(bd=4)
         self.label_senha.configure(relief=GROOVE)
@@ -51,12 +54,65 @@ class JanelaPro:
         self.entry_senha.configure(relief=GROOVE)
         self.entry_senha.place(relx=0.35,rely=0.40)
 
+    def deposia_agencia(self):
+        self.label_agencia = Label(self.root,text='AGENCIA')
+        self.label_agencia.configure(font='Arial 15 bold')
+        self.label_agencia.configure(bd=4)
+        self.label_agencia.configure(relief=GROOVE)
+        self.label_agencia.place(relx=0.20,rely=0.50)
+
+        self.entry_agencia = Entry(self.root)
+        self.entry_agencia.configure(font='Arial 15 bold')
+        self.entry_agencia.configure(bd=4)
+        self.entry_agencia.configure(relief=GROOVE)
+        self.entry_agencia.place(relx=0.35,rely=0.50)
+
+
+    def deposia_dinheiro(self):
+        self.label_deposito = Label(self.root,text='VALOR:')
+        self.label_deposito.configure(font='Arial 15 bold')
+        self.label_deposito.configure(bd=4)
+        self.label_deposito.configure(relief=GROOVE)
+        self.label_deposito.place(relx=0.20,rely=0.60)
+
+        self.entry_deposito = Entry(self.root)
+        self.entry_deposito.configure(font='Arial 15 bold')
+        self.entry_deposito.configure(bd=4)
+        self.entry_deposito.configure(relief=GROOVE)
+        self.entry_deposito.place(relx=0.35,rely=0.60)
 
     def botaopay(self):
-        self.btn2 = Button(self.root, text='FIM', command=self.res)
-        self.btn2.place(relx=0.40,rely=0.50)
+        self.btn2 = Button(self.root, text='CONFIMA', command=self.res)
+        self.btn2.configure(font="Arial 10 bold")
+        self.btn2.configure(width=18)
+        self.btn2.config(bg='#0000CD')
+        self.btn2.config(fg='white')
+        self.btn2.configure(height=2)
+        self.btn2.place(relx=0.50,rely=0.80)
+
+    def pega_senha_agencia(self,a):
+        p: Pessoas = None
+        for x in lista:
+            if x.senha == a:
+                p = a
+        return p
+
+    def btn_cancela(self):
+        self.btn_can = Button(self.root, text='CANCELA', command=self.cancela)
+        self.btn_can.configure(font="Arial 10 bold")
+        self.btn_can.configure(width=18)
+        self.btn_can.config(bg='#0000CD')
+        self.btn_can.config(fg='white')
+        self.btn_can.configure(height=2)
+        self.btn_can.place(relx=0.20,rely=0.80)
+
+    def cancela(self):
+        self.original.deiconify()
+        self.root.destroy()  
 
     def res(self):
+        loga: Pessoas = self.pega_senha_agencia(str(self.entry_senha.get()))
+        print(loga)
         self.original.deiconify()
         self.root.destroy()
 
@@ -158,7 +214,7 @@ class Contas:
 
     def destruir(self,*res):
         if self.entrynome.get() != '' and self.entrycpf.get() != '' and self.entrysenha.get() != '' and self.entryagencia.get() != '':
-            pessoas = Pessoas(self.entrynome.get(),self.entrycpf.get(),self.entrynome.get(),self.entryagencia.get())
+            pessoas = Pessoas(str(self.entrynome.get()),str(self.entrycpf.get()),str(self.entrynome.get()),str(self.entryagencia.get()))
             lista.append(pessoas)
 
             self.janelaC.destroy()
