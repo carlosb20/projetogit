@@ -93,7 +93,6 @@ class JanelaPro:
     def pega_senha_agencia(self,a):
         p: Pessoas = None
         for x in lista:
-            print(x.senha)
             if x.senha == a:
                 p = x
         return p
@@ -113,7 +112,7 @@ class JanelaPro:
 
     def res(self):
         
-        loga: Pessoas = self.pega_senha_agencia(str(self.entry_senha.get()))
+        loga: Pessoas = self.pega_senha_agencia(self.entry_senha.get())
         print(loga)
         self.original.deiconify()
         self.root.destroy()
@@ -216,7 +215,7 @@ class Contas:
 
     def destruir(self,*res):
         if self.entrynome.get() != '' and self.entrycpf.get() != '' and self.entrysenha.get() != '' and self.entryagencia.get() != '':
-            pessoas = Pessoas(str(self.entrynome.get()),str(self.entrycpf.get()),str(self.entrysenha.get()),str(self.entryagencia.get()))
+            pessoas = Pessoas(self.entrynome.get(),self.entrycpf.get(),self.entrysenha.get(),self.entryagencia.get())
             lista.append(pessoas)
 
             self.janelaC.destroy()
