@@ -7,7 +7,6 @@ from tkinter import messagebox
 lista:List[Pessoas] = []
 
 
-
 class JanelaPro:
     def __init__(self,master,original):
         self.root = master
@@ -90,10 +89,10 @@ class JanelaPro:
         self.btn2.configure(height=2)
         self.btn2.place(relx=0.50,rely=0.80)
 
-    def pega_senha_agencia(self,a):
+    def pega_senha_agencia(self,a,b):
         p: Pessoas = None
         for x in lista:
-            if x.senha == a:
+            if x.senha == a and x.agencia == b:
                 p = x
         return p
 
@@ -111,12 +110,15 @@ class JanelaPro:
         self.root.destroy()  
 
     def res(self):
-        
-        loga: Pessoas = self.pega_senha_agencia(self.entry_senha.get())
-        print(loga)
+        if self.entry_senha.get() != '' and self.entry_agencia.get() != '' and self.entry_deposito.get() != '':
+            loga: Pessoas = self.pega_senha_agencia(self.entry_senha.get(),self.entry_agencia.get())
+            if loga:
+                loga.deposito = float(self.entry_deposito.get())
+            
+            
         self.original.deiconify()
         self.root.destroy()
-
+        
 
 
 class Contas:
@@ -272,11 +274,14 @@ class Principal:
         Contas(self.janela3,self.janela)
 
     def btn_fucao(self,*v):
-
-        self.janela.withdraw()
-        self.janela02 = Toplevel(self.janela)
-        JanelaPro(self.janela02,self.janela)
-
+        if len(lista) > 0:
+            self.janela.withdraw()
+            self.janela02 = Toplevel(self.janela)
+            JanelaPro(self.janela02,self.janela)
+        else:
+            ress = messagebox.askyesno('NÃO A CONTA CADASTRADA','CADASTRA UMA CONTA')
+            if ress == TRUE:
+                self.abrir_conta_do_usuario()
 
 
 root = Tk()
