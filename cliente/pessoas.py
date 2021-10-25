@@ -31,6 +31,11 @@ class Pessoas:
     def deposito(self,valor):
         self.__saldo += valor
 
+    def formata_dinheiro(self,valor):
+        res = f' R$ {valor:_.2f}'
+        converte = res.replace('.',',').replace('_','.')
+        return converte
+
     def __str__(self) -> str:
-        return f'Cliente:{self.nome}\nCpf:{self.cpf}\nSenha:{self.senha}\nAgencia:{self.agencia}\nSaldo:{self.saldo}'
+        return f'Cliente:{self.nome}\nCpf:{self.cpf}\nSenha:{self.senha}\nAgencia:{self.agencia}\nSaldo:{self.formata_dinheiro(self.saldo)}'
 

@@ -89,6 +89,7 @@ class JanelaPro:
         self.btn2.configure(height=2)
         self.btn2.place(relx=0.50,rely=0.80)
 
+
     def pega_senha_agencia(self,a,b):
         p: Pessoas = None
         for x in lista:
@@ -109,12 +110,14 @@ class JanelaPro:
         self.original.deiconify()
         self.root.destroy()  
 
+
+
     def res(self):
         if self.entry_senha.get() != '' and self.entry_agencia.get() != '' and self.entry_deposito.get() != '':
             loga: Pessoas = self.pega_senha_agencia(self.entry_senha.get(),self.entry_agencia.get())
             if loga:
                 loga.deposito = float(self.entry_deposito.get())
-            
+            print(loga)  
             
         self.original.deiconify()
         self.root.destroy()
