@@ -233,9 +233,15 @@ class SacarDinheiro:
     def __init__(self,master,origem):
         self.saque = master
 
-        self.btnsaque = Button(self.saque,text='wdwdd').pack()
+        self.btnsaque = Button(self.saque,text='wdwdd',command=self.funcao_des)
+        self.btnsaque.pack()
 
         self.origem = origem
+
+    def funcao_des(self):
+        self.saque.destroy()
+        self.origem.deiconify()
+        
 
 
 class Principal:
@@ -307,7 +313,8 @@ class Principal:
         self.janela3 = Toplevel(self.janela)
         Contas(self.janela3,self.janela)
 
-    def funcaoSacar(self,*te):
+    def funcaoSacar(self,*tr):
+        self.janela.withdraw()
         self.pega = Toplevel(self.janela)
         SacarDinheiro(self.pega,self.janela)
 
