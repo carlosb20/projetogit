@@ -229,12 +229,23 @@ class Contas:
             messagebox.showerror('ERRO','preencha o espaço')
 
 
+class SacarDinheiro:
+    def __init__(self,master,origem):
+        self.saque = master
+
+        self.btnsaque = Button(self.saque,text='wdwdd').pack()
+
+        self.origem = origem
+
+
 class Principal:
     def __init__(self,master):
         self.janela = master
         self.janela['bg'] = 'yellow'
         self.tela()
         self.botao_deposito()
+        self.botao_sacar()
+        self.botao_transferencia()
         self.botao_abrir_conta()
         self.imagem()
 
@@ -247,6 +258,26 @@ class Principal:
         self.butao.config(fg='white')
         self.butao.bind('<Button>',self.btn_fucao)
         self.butao.place(relx=0.01,rely=0.32)
+
+    def botao_sacar(self):
+        self.sacar = Button(self.janela,text='SACAR')
+        self.sacar.configure(width=25)
+        self.sacar.config(height=2)
+        self.sacar.config(bg='#0000CD')
+        self.sacar.config(font='Arial 10')
+        self.sacar.config(fg='white')
+        self.sacar.bind('<Button>',self.funcaoSacar)
+        self.sacar.place(relx=0.01,rely=0.50)
+
+    def botao_transferencia(self):
+        self.trans = Button(self.janela,text='TRANSFERENCIA')
+        self.trans.configure(width=25)
+        self.trans.config(height=2)
+        self.trans.config(bg='#0000CD')
+        self.trans.config(font='Arial 10')
+        self.trans.config(fg='white')
+        #self.sacar.bind('<Button>',self.btn_fucao)
+        self.trans.place(relx=0.01,rely=0.70)
 
     def botao_abrir_conta(self):
 
@@ -275,6 +306,10 @@ class Principal:
         self.janela.withdraw()
         self.janela3 = Toplevel(self.janela)
         Contas(self.janela3,self.janela)
+
+    def funcaoSacar(self,*te):
+        self.pega = Toplevel(self.janela)
+        SacarDinheiro(self.pega,self.janela)
 
     def btn_fucao(self,*v):
         if len(lista) > 0:
