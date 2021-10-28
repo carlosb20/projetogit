@@ -23,7 +23,7 @@ class JanelaPro:
         self.root.geometry('900x500+200+100')
         self.root.title('DEPOSITO')
         self.root.iconbitmap()
-
+        self.root.state('zoomed')
         self.root['bg'] = 'yellow'
         self.labeltext = Label(self.root,text=' DEPOSITO ',bg='yellow')
         self.labeltext.config(font='Arial 20 bold')
@@ -139,6 +139,7 @@ class Contas:
 
     def tela_janelaC(self):
         self.janelaC.geometry('900x500+200+100')
+        self.janelaC.state('zoomed')
         self.janelaC.title('CADASTRAMENTO')
         self.janelaC['bg'] = 'yellow'
         self.labeltext = Label(self.janelaC,text=' CADASTRA CONTA ',bg='yellow')
@@ -232,11 +233,17 @@ class Contas:
 class SacarDinheiro:
     def __init__(self,master,origem):
         self.saque = master
+        self.tela_sacar()
 
         self.btnsaque = Button(self.saque,text='wdwdd',command=self.funcao_des)
         self.btnsaque.pack()
 
         self.origem = origem
+
+    def tela_sacar(self):
+        self.saque.geometry('900x500')
+        self.saque.state('zoomed')
+        
 
     def funcao_des(self):
         self.saque.destroy()
@@ -294,7 +301,8 @@ class Principal:
         self.butaoabrir.place(relx=0.90,rely=0.03)
 
     def tela(self):
-        self.janela.geometry('900x500+200+100')
+        self.janela.state('zoomed')
+        self.janela.geometry('1410x700+0+1')
         self.janela.title('BANCO DO BRASIL ')
 
     def imagem(self):
