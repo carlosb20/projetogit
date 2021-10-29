@@ -235,11 +235,54 @@ class SacarDinheiro:
         self.saque = master
         self.imagem5()
         self.tela_sacar()
-
-        self.btnsaque = Button(self.saque,text='wdwdd',command=self.funcao_des)
-        self.btnsaque.pack()
-
+        self.btn_sacar()
+        self.sacar_na_conta()
+        self.sacar_agencia()
+        self.sacar_dinheiro()
         self.origem = origem
+
+    def btn_sacar(self):
+        self.btnsaque = Button(self.saque,text='SACAR',command=self.funcao_des)
+        self.btnsaque.place(relx=0.50,rely=0.80)
+
+    def sacar_na_conta(self):
+        self.label_senha = Label(self.saque,text='CONTA',padx=10)
+        self.label_senha.configure(font='Arial 15 bold')
+        self.label_senha.configure(bd=4)
+        self.label_senha.configure(relief=GROOVE)
+        self.label_senha.place(relx=0.20,rely=0.40)
+
+        self.entry_senha = Entry(self.saque)
+        self.entry_senha.configure(font='Arial 15 bold')
+        self.entry_senha.configure(bd=4)
+        self.entry_senha.configure(relief=GROOVE)
+        self.entry_senha.place(relx=0.35,rely=0.40)
+
+    def sacar_agencia(self):
+        self.label_agencia = Label(self.saque,text='AGENCIA')
+        self.label_agencia.configure(font='Arial 15 bold')
+        self.label_agencia.configure(bd=4)
+        self.label_agencia.configure(relief=GROOVE)
+        self.label_agencia.place(relx=0.20,rely=0.50)
+
+        self.entry_agencia = Entry(self.saque)
+        self.entry_agencia.configure(font='Arial 15 bold')
+        self.entry_agencia.configure(bd=4)
+        self.entry_agencia.configure(relief=GROOVE)
+        self.entry_agencia.place(relx=0.35,rely=0.50)
+
+    def sacar_dinheiro(self):
+        self.label_deposito = Label(self.saque,text='VALOR:')
+        self.label_deposito.configure(font='Arial 15 bold')
+        self.label_deposito.configure(bd=4)
+        self.label_deposito.configure(relief=GROOVE)
+        self.label_deposito.place(relx=0.20,rely=0.60)
+
+        self.entry_deposito = Entry(self.saque)
+        self.entry_deposito.configure(font='Arial 15 bold')
+        self.entry_deposito.configure(bd=4)
+        self.entry_deposito.configure(relief=GROOVE)
+        self.entry_deposito.place(relx=0.35,rely=0.60)
 
     def tela_sacar(self):
         self.saque.geometry('900x500')
