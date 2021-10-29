@@ -233,6 +233,7 @@ class Contas:
 class SacarDinheiro:
     def __init__(self,master,origem):
         self.saque = master
+        self.imagem5()
         self.tela_sacar()
 
         self.btnsaque = Button(self.saque,text='wdwdd',command=self.funcao_des)
@@ -243,7 +244,20 @@ class SacarDinheiro:
     def tela_sacar(self):
         self.saque.geometry('900x500')
         self.saque.state('zoomed')
+        self.saque.config(bg='yellow')
         
+
+    def imagem5(self):
+        self.imagem2 = Image.open('bra1.png')
+        self.tamanho = self.imagem2.resize((100,100),Image.ANTIALIAS)
+        self.foto = ImageTk.PhotoImage(self.tamanho)
+
+        self.ver = Label(self.saque,image=self.foto,bg='yellow',bd=4,relief=GROOVE)
+        self.ver.place(relx=0.01,rely=0.02)
+
+        self.linha = Label(self.saque,text='_'*272,bg='yellow')
+        self.linha.place(relx=0.00,rely=0.24)
+
 
     def funcao_des(self):
         self.saque.destroy()
