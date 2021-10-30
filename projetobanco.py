@@ -274,11 +274,11 @@ class SacarDinheiro:
         self.label_deposito.configure(relief=GROOVE)
         self.label_deposito.place(relx=0.20,rely=0.60)
 
-        self.entry_deposito = Entry(self.saque)
-        self.entry_deposito.configure(font='Arial 15 bold')
-        self.entry_deposito.configure(bd=4)
-        self.entry_deposito.configure(relief=GROOVE)
-        self.entry_deposito.place(relx=0.35,rely=0.60)
+        self.sacar_deposito = Entry(self.saque)
+        self.sacar_deposito.configure(font='Arial 15 bold')
+        self.sacar_deposito.configure(bd=4)
+        self.sacar_deposito.configure(relief=GROOVE)
+        self.sacar_deposito.place(relx=0.35,rely=0.60)
 
     def tela_sacar(self):
         self.saque.geometry('900x500')
@@ -300,7 +300,13 @@ class SacarDinheiro:
     def saque_dinheiro(self):
         if self.entry_sacar.get() != '' and self.entry_agencia.get() != '':
             real: Pessoas = pega_senha_agencia(self.entry_sacar.get(),self.entry_agencia.get())
-            print(real)
+            if real.saldo >= int(self.sacar_deposito.get()):
+                real.sacar = int(self.sacar_deposito.get())
+                
+                print(real)
+            else:
+                print('menor')
+                
         self.saque.destroy()
         self.origem.deiconify()
 

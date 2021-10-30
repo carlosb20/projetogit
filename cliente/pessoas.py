@@ -31,6 +31,10 @@ class Pessoas:
     def deposito(self,valor):
         self.__saldo += valor
 
+    @saldo.setter
+    def sacar(self,valor):
+        self.__saldo -= valor
+
     def formata_dinheiro(self,valor):
         res = f' R$ {valor:_.2f}'
         converte = res.replace('.',',').replace('_','.')
