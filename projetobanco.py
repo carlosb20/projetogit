@@ -6,6 +6,12 @@ from tkinter import messagebox
 
 lista:List[Pessoas] = []
 
+def pega_senha_agencia(a,b):
+        p: Pessoas = None
+        for x in lista:
+            if x.senha == a and x.agencia == b:
+                p = x
+        return p
 
 class JanelaPro:
     def __init__(self,master,original):
@@ -90,13 +96,6 @@ class JanelaPro:
         self.btn2.place(relx=0.50,rely=0.80)
 
 
-    def pega_senha_agencia(self,a,b):
-        p: Pessoas = None
-        for x in lista:
-            if x.senha == a and x.agencia == b:
-                p = x
-        return p
-
     def btn_cancela(self):
         self.btn_can = Button(self.root, text='CANCELA', command=self.cancela)
         self.btn_can.configure(font="Arial 10 bold")
@@ -111,10 +110,9 @@ class JanelaPro:
         self.root.destroy()  
 
 
-
     def res(self):
         if self.entry_senha.get() != '' and self.entry_agencia.get() != '' and self.entry_deposito.get() != '':
-            loga: Pessoas = self.pega_senha_agencia(self.entry_senha.get(),self.entry_agencia.get())
+            loga: Pessoas = pega_senha_agencia(self.entry_senha.get(),self.entry_agencia.get())
             if loga:
                 loga.deposito = float(self.entry_deposito.get())
             print(loga)  
@@ -122,8 +120,6 @@ class JanelaPro:
         self.original.deiconify()
         self.root.destroy()
         
-
-
 class Contas:
     def __init__(self,master,orig):
         self.janelaC = master
@@ -242,7 +238,7 @@ class SacarDinheiro:
         self.origem = origem
 
     def btn_sacar(self):
-        self.btnsaque = Button(self.saque,text='SACAR',command=self.funcao_des)
+        self.btnsaque = Button(self.saque,text='SACAR',command=self.saque_dinheiro)
         self.btnsaque.place(relx=0.50,rely=0.80)
 
     def sacar_na_conta(self):
@@ -252,11 +248,11 @@ class SacarDinheiro:
         self.label_senha.configure(relief=GROOVE)
         self.label_senha.place(relx=0.20,rely=0.40)
 
-        self.entry_senha = Entry(self.saque)
-        self.entry_senha.configure(font='Arial 15 bold')
-        self.entry_senha.configure(bd=4)
-        self.entry_senha.configure(relief=GROOVE)
-        self.entry_senha.place(relx=0.35,rely=0.40)
+        self.entry_sacar = Entry(self.saque)
+        self.entry_sacar.configure(font='Arial 15 bold')
+        self.entry_sacar.configure(bd=4)
+        self.entry_sacar.configure(relief=GROOVE)
+        self.entry_sacar.place(relx=0.35,rely=0.40)
 
     def sacar_agencia(self):
         self.label_agencia = Label(self.saque,text='AGENCIA')
@@ -301,10 +297,18 @@ class SacarDinheiro:
         self.linha = Label(self.saque,text='_'*272,bg='yellow')
         self.linha.place(relx=0.00,rely=0.24)
 
-
-    def funcao_des(self):
+    def saque_dinheiro(self):
+        if self.entry_sacar.get() != '' and self.entry_agencia.get() != '':
+            real: Pessoas = pega_senha_agencia(self.entry_sacar.get(),self.entry_agencia.get())
+            print(real)
         self.saque.destroy()
         self.origem.deiconify()
+
+        
+
+    #def funcao_des(self):
+        #self.saque.destroy()
+        #self.origem.deiconify()
         
 
 
@@ -379,9 +383,10 @@ class Principal:
         Contas(self.janela3,self.janela)
 
     def funcaoSacar(self,*tr):
-        self.janela.withdraw()
-        self.pega = Toplevel(self.janela)
-        SacarDinheiro(self.pega,self.janela)
+        if len(lista) > 0:
+            self.janela.withdraw()
+            self.pega = Toplevel(self.janela)
+            SacarDinheiro(self.pega,self.janela)
 
     def btn_fucao(self,*v):
         if len(lista) > 0:
